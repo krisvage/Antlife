@@ -67,10 +67,16 @@
 		</Parameter>
 		<Parameter>
 			<Name>FoodSources</Name>
+			<Description><info><![CDATA[number of food sources]]></info></Description>
 			<Parameter>
 				<Name>NbFoodSources</Name>
 				<Description><info><![CDATA[number of food sources]]></info></Description>
 				<Value>3</Value>
+			</Parameter>
+			<Parameter>
+				<Name>FoodSources</Name>
+				<Description><info><![CDATA[number of food sources]]></info></Description>
+				<Value>1,8;3,8|3,8;5,8|5,8;7,8</Value>
 			</Parameter>
 			<Parameter>
 				<Name>FoodSourceSize</Name>
@@ -118,10 +124,16 @@
 		</Parameter>
 		<Parameter>
 			<Name>Walls</Name>
+			<Description><info><![CDATA[default number of wall units]]></info></Description>
 			<Parameter>
 				<Name>NbWalls</Name>
 				<Description><info><![CDATA[default number of wall units]]></info></Description>
 				<Value>5</Value>
+			</Parameter>
+			<Parameter>
+				<Name>Walls</Name>
+				<Description><info><![CDATA[default number of wall units]]></info></Description>
+				<Value>2,8;5,8|2,8;4,8|2,8;2,8|5,8;3,8|5,8;5,8|4,8;6,8</Value>
 			</Parameter>
 			<Parameter>
 				<Name>WallSize</Name>

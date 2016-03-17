@@ -15,6 +15,17 @@ class Landscape(Landscapes.Landscape):
     Size = Scenario.Parameter('LandSize')
     NbFoodSources = Scenario.Parameter('NbFoodSources')
     NbWalls = Scenario.Parameter('NbWalls')
+
+    food_sources = Scenario.Parameter('FoodSources')
+
+    coords = [point.split(';') for point in food_sources.split('|')]
+    food_sources_locations = [((int(c[0].split(',')[0]), int(c[0].split(',')[1])), (int(c[1].split(',')[0]), int(c[1].split(',')[1]))) for c in [xy for xy in coords]]
+
+    walls = Scenario.Parameter('Walls')
+
+    coords = [point.split(';') for point in walls.split('|')]
+    wall_locations = [((int(c[0].split(',')[0]), int(c[0].split(',')[1])), (int(c[1].split(',')[0]), int(c[1].split(',')[1]))) for c in [xy for xy in coords]]
+
     self.Scenario = Scenario
     self.Observer = Observer
     self.PARAMS = PARAMS
@@ -24,9 +35,10 @@ class Landscape(Landscapes.Landscape):
     # Positioning Food Sources
     self.FoodSourceNumber = NbFoodSources
     self.FoodSources = []
-    for FSn in range(self.FoodSourceNumber):
+    for FSn, xy in enumerate(food_sources_locations):
+      x, y = xy
       FS = FoodSource(Scenario, 'FS%d' % FSn)
-      FS.locate((random.randint(0,Size-1),random.randint(0,Size-1)))
+      FS.locate((x[0] * Size / x[1], y[0] * Size / y[1]))
       self.FoodSources.append(FS)
       for Pos in self.neighbours(FS.locate(), Radius=FS.Radius):
         FS.Area.append(Pos)
@@ -35,9 +47,10 @@ class Landscape(Landscapes.Landscape):
 
     # Positioning walls
     self.WallPos = []
-    for Wn in range(NbWalls):
+    for Wn, xy in enumerate(wall_locations):
       W = Wall(Scenario, 'W%d' % Wn)
-      wall_pos = (random.randint(0, Size-1), random.randint(0, Size-1))
+      x, y = xy
+      wall_pos = (x[0] * Size / x[1], y[0] * Size / y[1])
       W.locate(wall_pos)
       self.WallPos.append(wall_pos)
 

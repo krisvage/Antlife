@@ -55,7 +55,29 @@ class Ant(EI.Individual):
       Decrease = int(self.PPStock / Distance) # Linear decrease
       self.PPStock -= Decrease
       # if self.PPStock <= Gbl.Parameter('PPMin'):   self.PPStock = Gbl.Parameter('PPMin')  # always lay some amount of positive pheromone
-      self.location = c2t(t2c(self.location) + 2 * Direction) # complex number operation
+      NextPos = c2t(t2c(self.location) + 2 * Direction) # complex number operation
+     
+      if (NextPos in self.Land.WallPos):
+        dr = c2t(Direction)
+        rand_dir = 1 if (random.random() >= 0.5) else -1
+        if dr[0] is 0:
+          dr = t2c((rand_dir, dr[1]))
+        elif dr[1] is 0:
+          dr = t2c((dr[0], rand_dir))
+        else:
+          if rand_dir is 1:
+            dr = t2c((dr[0] * -1, dr[1]))
+          else:
+            dr = t2c((dr[0], dr[1] * -1))
+
+        NextPos = c2t(t2c(self.location) + 2 * dr)
+
+      self.location = NextPos
+
+      # print(self.location)
+      # print(c2t(Direction))
+      # print("\n\n\n----\n\n\n")
+
       self.location = self.Land.ToricConversion(self.location)   # landscape is a tore
       self.Observer.recordChanges((self.ID, self.location + self.PARAMS.AntAspectWhenLaden)) # for ongoing display of ants
     else:
@@ -76,20 +98,19 @@ class Ant(EI.Individual):
       # print self.ID, 'in', self.location, 'sniffs', NextPos
       if NextPos is None or random.randint(0,100) < self.Scenario.Parameter('Exploration'): 
         # either all neighbouring cells have been visited or in the mood for exploration
-        NextPos = c2t(t2c(self.location) + complex(random.randint(-1,1),random.randint(-1,1)))
-        NextPos = self.Land.ToricConversion(NextPos)
+        NextPos = self.Land.WallPos[0]
+        i = 0
+
+        while NextPos in self.Land.WallPos and i < 6:
+          NextPos = c2t(t2c(self.location) + complex(random.randint(-1,1),random.randint(-1,1)))
+          NextPos = self.Land.ToricConversion(NextPos)
+          i += 1
       # Marking the old location as visited
       if self.Scenario.Parameter('NPDeposit'):
         self.Land.npheromone(self.location, self.Scenario.Parameter('NPDeposit'))
         # Observer.recordChanges(('NP%d_%d' % self.location, self.location + NPAspect)) # for ongoing display of negative pheromone
 
-      # print("\n\n-----------------\n\n")
-      # print(NextPos)
-      # print(self.Land.WallPos)
-      if NextPos not in self.Land.WallPos:
-        self.location = NextPos
-      # else:
-      #   print('Blocked by wall')
+      self.location = NextPos
 
       if self.Land.food(self.location) > 0:  
         self.Land.food(self.location, -1)  # consume one unit of food

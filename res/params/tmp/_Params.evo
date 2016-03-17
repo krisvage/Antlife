@@ -4,6 +4,7 @@ Evaporation	3
 Exploration	30
 FoodQuantity	100
 FoodSourceSize	2
+FoodSources	1,8;3,8|3,8;5,8|5,8;7,8
 Icon	res/imgs/ants/ants-1.gif
 LandSize	100
 NPDeposit	50
@@ -20,3 +21,4 @@ Target	src/antlife/ants.py
 TimeLimit	500000
 Title	Evolife_Ants
 WallSize	11
+Walls	2,8;5,8|2,8;4,8|2,8;2,8|5,8;3,8|5,8;5,8|4,8;6,8

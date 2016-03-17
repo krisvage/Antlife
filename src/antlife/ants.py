@@ -53,7 +53,7 @@ import res.imgs.ants as imgs
 AntAspect = ('black', 6)  # 6 = size
 AntAspectWhenLaden = ('red1', 7)  # 6 = size
 FoodAspect = ('yellow', 14)
-WallAspect = ('red', 70)
+WallAspect = ('red', 42)
 FoodDepletedAspect = ('brown', 14)
 PPAspect = (17, 2)  # 17th colour
 NPAspect = ('blue', 2)
