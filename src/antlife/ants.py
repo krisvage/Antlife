@@ -38,7 +38,6 @@ sys.path.append('libs')
 
 import Evolife.Scenarii.Parameters as EPar
 import Evolife.QtGraphics.Evolife_Window as EW
-import Evolife.Tools.Tools as ET
 
 from src.antlife.ant_observer import AntObserver
 from src.antlife.landscape    import Landscape
