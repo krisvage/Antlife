@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+cd `dirname $0`
+cd ..
+unzip libs/Evolife -d libs/
+cd libs/Evolife
+python3 first.py
+touch Other/__init__.py
+cd ../..

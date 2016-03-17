@@ -1,2 +1,5 @@
+.idea/
 .DS_Store
+libs/Evolife/
 *.pyc
+libs/Evolife-*.zip

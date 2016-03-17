@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
 cd `dirname $0`
-python3 -m src.presentation.app &
-
+cd ..
+export PYTHONPATH="${PYTHONPATH}:."
+python3 libs/Evolife/QtGraphics/TreeExplore.pyw res/config/AntsConfig.xml &
+wait $!
+mv Ants_.csv res/results
+mv Ants__res.csv res/results
